@@ -5,9 +5,10 @@ import ChartLayout from "../../layout/ChartLayout";
 import { useGeneratePost } from "./useGeneratePost";
 import Posts from "../../components/Posts";
 import Button from "../../components/Button";
+import Errors from "../../components/Errors";
 
 const GeneratePost = () => {
-  const { prompt, loading, promptResponse, inputChangeHandler, handleSubmit } =
+  const { prompt, loading,error, promptResponse, inputChangeHandler, handleSubmit } =
     useGeneratePost();
 
   return (
@@ -38,6 +39,7 @@ const GeneratePost = () => {
           <div className="h-[calc(100dvh_-_200px)] overflow-auto  text-justify my-[15px] py-[10px] w-[90%]">
             {loading && <Loader />}
             {!loading && <Posts data={promptResponse} />}
+            {error && <Errors />}
           </div>
         </div>
       </>
