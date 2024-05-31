@@ -10,6 +10,7 @@ export const useGeneratePost = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [promptResponse, setPromptResponse] = useState<string[]>([]);
 
+  
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setPropmt(e.target.value)
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
