@@ -1,9 +1,10 @@
-import { PLATFORMS } from "./constant";
 import Input from "../../components/Input";
 import sendIcon from "../../assets/arrow.png";
 import Loader from "../../components/Loader";
 import ChartLayout from "../../layout/ChartLayout";
 import { useGeneratePost } from "./useGeneratePost";
+import Posts from "../../components/Posts";
+import Button from "../../components/Button";
 
 const GeneratePost = () => {
   const { prompt, loading, promptResponse, inputChangeHandler, handleSubmit } =
@@ -25,35 +26,18 @@ const GeneratePost = () => {
             handleChange={inputChangeHandler}
             value={prompt}
           />
-          <button
-            disabled={loading}
-            type="submit"
-            className="bg-slate-200 px-2 ms-4 rounded-md"
-          >
+          <Button disable={loading}>
             <img
               src={sendIcon}
               alt="send"
               className="h-[50px] w-[50px] object-contain"
             />
-          </button>
+          </Button>
         </form>
         <div className="flex justify-center items-center">
           <div className="h-[calc(100dvh_-_200px)] overflow-auto  text-justify my-[15px] py-[10px] w-[90%]">
             {loading && <Loader />}
-            {!loading &&
-              promptResponse.map((e, i) => {
-                return e?.length ? (
-                  <div
-                    key={i}
-                    className="mb-5 border border-black rounded-xl p-3 bg-amber-50 "
-                  >
-                    <p className="capitalize font-semibold text-xl">
-                      {PLATFORMS[i]}
-                    </p>
-                    <p>{e}</p>
-                  </div>
-                ) : null;
-              })}
+            {!loading && <Posts data={promptResponse} />}
           </div>
         </div>
       </>
