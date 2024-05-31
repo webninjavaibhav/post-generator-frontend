@@ -6,9 +6,11 @@ import { generatePrompts } from "../../utils/generatePromp";
 
 export const useGeneratePost = () => {
   const [prompt, setPropmt] = useState<string>("");
+  const [error , setError] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false);
   const [promptResponse, setPromptResponse] = useState<string[]>([]);
 
+  
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setPropmt(e.target.value)
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -34,11 +36,12 @@ export const useGeneratePost = () => {
         }
       }
       setPropmt("")
+      setError(results?.filter((e)=> e === null)?.length === 3)
       setPromptResponse(results ?? []);
     }
 
     setLoading(false);
   };
 
-  return { prompt, loading, promptResponse, inputChangeHandler, handleSubmit };
+  return { prompt, loading, error ,promptResponse, inputChangeHandler, handleSubmit };
 };
